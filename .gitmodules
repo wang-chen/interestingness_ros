@@ -1,0 +1,3 @@
+[submodule "script/interestingness"]
+	path = script/interestingness
+	url = https://github.com/wang-chen/interestingness
