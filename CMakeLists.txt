@@ -4,7 +4,7 @@ project(interestingness_ros)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 set(CMAKE_CXX_STANDARD 11)
-list(APPEND CMAKE_PREFIX_PATH "/usr/lib/libtorch")
+# list(APPEND CMAKE_PREFIX_PATH "/usr/lib/libtorch")
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -19,8 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 
-find_package(Torch REQUIRED)
-find_package(OpenCV REQUIRED)
+# find_package(Torch REQUIRED)
+# find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -124,10 +124,10 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(
+# include_directories(
 # include
-  ${catkin_INCLUDE_DIRS}
-)
+# ${catkin_INCLUDE_DIRS}
+# )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -142,7 +142,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(interestingness_node src/interestingness_node.cpp)
+# add_executable(interestingness_node src/interestingness_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,11 +155,11 @@ add_executable(interestingness_node src/interestingness_node.cpp)
 # add_dependencies(interestingness_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(interestingness_node
-  ${catkin_LIBRARIES}
-  ${TORCH_LIBRARIES}
-  ${OpenCV_LIBS}
-)
+# target_link_libraries(interestingness_node
+#   ${catkin_LIBRARIES}
+#   ${TORCH_LIBRARIES}
+#   ${OpenCV_LIBS}
+# )
 
 #############
 ## Install ##
