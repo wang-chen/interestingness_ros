@@ -60,8 +60,8 @@ class InterestNode:
         super(InterestNode, self).__init__()
         rospy.init_node('interestingness_node')
         rospy.Subscriber(args.image_topic, Image, self.callback)
-        self.image_pub = rospy.Publisher('interestingness_image', Image)
-        self.info_pub = rospy.Publisher('interestingness_info', InterestInfo)
+        self.image_pub = rospy.Publisher('interestingness/image', Image)
+        self.info_pub = rospy.Publisher('interestingness/info', InterestInfo)
 
         self.transform = transform
         self.bridge = CvBridge()
