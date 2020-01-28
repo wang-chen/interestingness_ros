@@ -58,19 +58,14 @@ from interestingness.torchutil import ConvLoss, CosineLoss, CorrelationLoss, Spl
 class InterestNode:
     def __init__(self, transform):
         super(InterestNode, self).__init__()
-        rospy.init_node('interestingness_node')
+        self.transform, self.bridge = transform, CvBridge()
+        net = torch.load(args.model_save)
+        net.set_train(False)
+        net.memory.set_learning_rate(rr=args.rr, wr=args.wr)
+        self.net = net.cuda() if torch.cuda.is_available() else net
         rospy.Subscriber(args.image_topic, Image, self.callback)
-        self.image_pub = rospy.Publisher('interestingness/image', Image)
-        self.info_pub = rospy.Publisher('interestingness/info', InterestInfo)
-
-        self.transform = transform
-        self.bridge = CvBridge()
-        self.net = torch.load(args.model_save)
-        self.net.set_train(False)
-        self.net.memory.set_learning_rate(rr=args.rr, wr=args.wr)
-        if torch.cuda.is_available():
-            self.net = self.net.cuda()
-        torch.cuda.synchronize()
+        self.image_pub = rospy.Publisher('interestingness/image', Image, queue_size=10)
+        self.info_pub = rospy.Publisher('interestingness/info', InterestInfo, queue_size=10)
 
     def spin(self):
         rospy.spin()
@@ -98,18 +93,42 @@ class InterestNode:
             self.info_pub.publish(info)
 
 
+class ROSArgparse():
+    def __init__(self, relative=None):
+        self.relative = relative
+
+    def add_argument(self, name, default, type=None, help=None):
+        name = self.relative + name
+        if rospy.has_param(name):
+            rospy.loginfo('Get param %s', name)
+        else:
+            rospy.logwarn('Couldn\'t find param: %s, Using default: %s', name, default)
+        value = rospy.get_param(name, default)
+        variable = name[name.rfind('/')+1:].replace('-','_')
+        if isinstance(value, str):
+            exec('self.%s=\'%s\''%(variable, value))
+        else:
+            exec('self.%s=%s'%(variable, value))
+
+    def parse_args(self):
+        return self
+
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='ROS Interestingness Networks')
-    parser.add_argument("--image-topic", type=str, default='/rs_front/color/image', help="image topic to subscribe")
-    parser.add_argument("--model-save", type=str, default=pack_path+'/saves/ae.pt.SubTF.interest.mse', help="read model")
-    parser.add_argument("--crop-size", type=int, default=320, help='crop size')
-    parser.add_argument("--num-interest", type=int, default=10, help='loss compute by grid')
-    parser.add_argument("--skip-frames", type=int, default=5, help='number of skip frame')
-    parser.add_argument("--window-size", type=int, default=1, help='smooth window size >=1')
-    parser.add_argument('--save-flag', type=str, default='ros-interest', help='save name flag')
-    parser.add_argument("--rr", type=float, default=5, help="reading rate")
-    parser.add_argument("--wr", type=float, default=5, help="writing rate")
-    args = parser.parse_args(); print(args)
+
+    rospy.init_node('interestingness_node')
+    parser = ROSArgparse(relative='interestingness_node/')
+    parser.add_argument("image-topic", default='/rs_front/color/image')
+    parser.add_argument("data-root", type=str, default='/data/datasets', help="dataset root folder")
+    parser.add_argument("model-save", type=str, default=pack_path+'/saves/ae.pt.SubTF.interest.mse', help="read model")
+    parser.add_argument("crop-size", type=int, default=320, help='crop size')
+    parser.add_argument("num-interest", type=int, default=10, help='loss compute by grid')
+    parser.add_argument("skip-frames", type=int, default=1, help='number of skip frame')
+    parser.add_argument("window-size", type=int, default=1, help='smooth window size >=1')
+    parser.add_argument('save-flag', type=str, default='interests', help='save name flag')
+    parser.add_argument("rr", type=float, default=5, help="reading rate")
+    parser.add_argument("wr", type=float, default=5, help="writing rate")
+    args = parser.parse_args()
 
     results_path = os.path.join(pack_path,'results')
     if not os.path.exists(results_path):
@@ -118,7 +137,7 @@ if __name__ == '__main__':
     transform = transforms.Compose([
         VerticalFlip(), # Front camera of SubTF is mounted vertical flipped.
         transforms.CenterCrop(args.crop_size),
-        transforms.Resize((args.crop_size,args.crop_size)),
+        transforms.Resize((args.crop_size, args.crop_size)),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
