@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Copyright <2019> <Chen Wang [https://chenwang.site], Carnegie Mellon University>
 
@@ -47,8 +47,9 @@ interestingness_path = os.path.join(pack_path,'interestingness')
 sys.path.append(pack_path)
 sys.path.append(interestingness_path)
 
+from rosutil import ROSArgparse
 from interestingness_ros.msg import InterestInfo
-from interestingness.test_interest import Interest, MovAvg, show_batch_box
+from interestingness.test_interest import Interest, MovAvg, show_batch_box, level_height
 from interestingness.interestingness import AE, VAE, AutoEncoder, Interestingness
 from interestingness.dataset import ImageData, Dronefilm, DroneFilming, SubT, SubTF, PersonalVideo
 from interestingness.torchutil import VerticalFlip, count_parameters, show_batch, show_batch_origin, Timer, MovAvg
@@ -87,31 +88,10 @@ class InterestNode:
             frame = 255*show_batch_box(frame, msg.header.seq, loss.item(),show_now=False)
             img_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))
             info = InterestInfo()
-            info.level = loss.item()
+            info.level = level_height(loss.item())
             info.header = img_msg.header = msg.header
             self.image_pub.publish(img_msg)
             self.info_pub.publish(info)
-
-
-class ROSArgparse():
-    def __init__(self, relative=None):
-        self.relative = relative
-
-    def add_argument(self, name, default, type=None, help=None):
-        name = self.relative + name
-        if rospy.has_param(name):
-            rospy.loginfo('Get param %s', name)
-        else:
-            rospy.logwarn('Couldn\'t find param: %s, Using default: %s', name, default)
-        value = rospy.get_param(name, default)
-        variable = name[name.rfind('/')+1:].replace('-','_')
-        if isinstance(value, str):
-            exec('self.%s=\'%s\''%(variable, value))
-        else:
-            exec('self.%s=%s'%(variable, value))
-
-    def parse_args(self):
-        return self
 
 
 if __name__ == '__main__':

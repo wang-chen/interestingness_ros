@@ -15,4 +15,9 @@
         <param name="wr" value="5" />
     </node>
 
+    <node pkg="interestingness_ros" type="interest_marker.py" name="interestmarker_node" output="screen">
+        <remap from="/interestingness/info" to="/interestingness/info"/>
+        <param name="min-level" value="0.1" />
+    </node>
+
 </launch>
