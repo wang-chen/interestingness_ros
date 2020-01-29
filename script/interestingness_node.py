@@ -49,7 +49,7 @@ sys.path.append(interestingness_path)
 
 from rosutil import ROSArgparse
 from interestingness_ros.msg import InterestInfo
-from interestingness.test_interest import Interest, MovAvg, show_batch_box, level_height
+from interestingness.test_interest import MovAvg, show_batch_box, level_height
 from interestingness.interestingness import AE, VAE, AutoEncoder, Interestingness
 from interestingness.dataset import ImageData, Dronefilm, DroneFilming, SubT, SubTF, PersonalVideo
 from interestingness.torchutil import VerticalFlip, count_parameters, show_batch, show_batch_origin, Timer, MovAvg
@@ -120,10 +120,6 @@ if __name__ == '__main__':
         transforms.Resize((args.crop_size, args.crop_size)),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
-
-    drawbox = ConvLoss(input_size=args.crop_size, kernel_size=args.crop_size//2, stride=args.crop_size//4)
-
-    interest = Interest(args.num_interest, os.path.join(results_path, '%s.txt'%(args.save_flag)))
 
     movavg = MovAvg(args.window_size)
 
