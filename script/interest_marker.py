@@ -38,7 +38,7 @@ from visualization_msgs.msg import Marker, MarkerArray
 
 def info_callback(msg):
     if msg.level < args.min_level:
-        rospy.loginfo('Skip marker with level {}'.format(msg.level))
+        rospy.loginfo('Skip interests with level: {}'.format(msg.level))
         return
 
     marker = Marker()
@@ -55,7 +55,7 @@ def info_callback(msg):
     marker.pose.position.z = 1
     marker.lifetime.secs = 999999999
     publisher.publish(marker)
-    rospy.loginfo('Published marker with level {}.'.format(msg.level))
+    rospy.logwarn('Sent interests with level: {}.'.format(msg.level))
 
 
 if __name__ == '__main__':
