@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find interestingness_ros)/launch/interestingness.launch" />
+
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find interestingness_ros)/rviz/marker.rviz" />
+
+</launch>
+
+
