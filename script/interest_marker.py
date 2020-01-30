@@ -49,10 +49,10 @@ def info_callback(msg):
 
     marker.color.a = msg.level
     marker.color.r, marker.color.g, marker.color.b = 1, 0, 0
-    marker.scale.x, marker.scale.y, marker.scale.z = 5, 5, 5
+    marker.scale.x, marker.scale.y, marker.scale.z = [4*msg.level]*3
 
     marker.pose.orientation.w = 1
-    marker.pose.position.z = 1
+    marker.pose.position.z = 3
     marker.lifetime.secs = 999999999
     publisher.publish(marker)
     rospy.logwarn('Sent interests with level: {}.'.format(msg.level))
