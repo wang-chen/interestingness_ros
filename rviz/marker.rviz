@@ -68,9 +68,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 48; 48; 48
-      Max Intensity: 3.0125479698181152
+      Max Intensity: 1.3542518615722656
       Min Color: 48; 48; 48
-      Min Intensity: -4.64126443862915
+      Min Intensity: -1.5330826044082642
       Name: PointCloud2
       Position Transformer: XYZ
       Queue Size: 10
@@ -198,135 +198,129 @@ Visualization Manager:
       Queue Size: 1
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        aft_mapped:
-          Value: true
-        key_pose:
-          Value: true
-        laser_odom:
-          Value: false
-        loop_closed:
-          Value: true
-        map:
-          Value: true
-        map_rot:
-          Value: true
-        nuc/bluetooth:
-          Value: true
-        nuc/wifi:
-          Value: true
-        rs_back/camera_color_frame:
-          Value: true
-        rs_back/camera_color_optical_frame:
-          Value: true
-        rs_back/camera_depth_frame:
-          Value: true
-        rs_back/camera_depth_optical_frame:
-          Value: true
-        rs_back/camera_link:
-          Value: true
-        rs_front/camera_color_frame:
-          Value: true
-        rs_front/camera_color_optical_frame:
-          Value: true
-        rs_front/camera_depth_frame:
-          Value: true
-        rs_front/camera_depth_optical_frame:
-          Value: true
-        rs_front/camera_link:
-          Value: true
-        rs_left/camera_color_frame:
-          Value: true
-        rs_left/camera_color_optical_frame:
-          Value: true
-        rs_left/camera_depth_frame:
-          Value: true
-        rs_left/camera_depth_optical_frame:
-          Value: true
-        rs_left/camera_link:
-          Value: true
-        rs_right/camera_color_frame:
-          Value: true
-        rs_right/camera_color_optical_frame:
-          Value: true
-        rs_right/camera_depth_frame:
-          Value: true
-        rs_right/camera_depth_optical_frame:
-          Value: true
-        rs_right/camera_link:
-          Value: true
-        sensor:
-          Value: true
-        sensor_init:
-          Value: true
-        sensor_init_rot:
-          Value: true
-        thermal/camera_link:
-          Value: true
-        thermal/optical_frame:
-          Value: true
-        velodyne:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        sensor_init:
-          sensor:
-            map:
-              map_rot:
-                key_pose:
-                  {}
-                loop_closed:
-                  {}
-            velodyne:
-              nuc/bluetooth:
-                {}
-              nuc/wifi:
-                {}
-              rs_back/camera_link:
-                rs_back/camera_color_frame:
-                  rs_back/camera_color_optical_frame:
-                    {}
-                rs_back/camera_depth_frame:
-                  rs_back/camera_depth_optical_frame:
-                    {}
-              rs_front/camera_link:
-                rs_front/camera_color_frame:
-                  rs_front/camera_color_optical_frame:
-                    {}
-                rs_front/camera_depth_frame:
-                  rs_front/camera_depth_optical_frame:
-                    {}
-              rs_left/camera_link:
-                rs_left/camera_color_frame:
-                  rs_left/camera_color_optical_frame:
-                    {}
-                rs_left/camera_depth_frame:
-                  rs_left/camera_depth_optical_frame:
-                    {}
-              rs_right/camera_link:
-                rs_right/camera_color_frame:
-                  rs_right/camera_color_optical_frame:
-                    {}
-                rs_right/camera_depth_frame:
-                  rs_right/camera_depth_optical_frame:
-                    {}
-              thermal/camera_link:
-                thermal/optical_frame:
-                  {}
-          sensor_init_rot:
-            aft_mapped:
-              {}
-            laser_odom:
-              {}
+        {}
+      Update Interval: 0
+      Value: false
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_laser:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_laser_mount:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_frame_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_bumper_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        inertial_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rear_bumper_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sensor_arch_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        top_chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        top_plate_front_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        top_plate_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        top_plate_rear_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        user_rail_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
       Update Interval: 0
       Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 46; 52; 54
@@ -355,25 +349,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 22.686330795288086
+      Distance: 17.591733932495117
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -6.676979064941406
-        Y: -7.401457786560059
-        Z: 0.0001539082732051611
+        X: 4.7866315841674805
+        Y: -5.973567008972168
+        Z: 0.00015296500350814313
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3397974371910095
+      Pitch: 0.3947971761226654
       Target Frame: rs_front/camera_color_frame
       Value: XYOrbit (rviz)
-      Yaw: 3.991861343383789
+      Yaw: 4.371852397918701
     Saved: ~
 Window Geometry:
   Displays:

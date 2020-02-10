@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
 <launch>
 
+    <arg name="use_sim_time" value="true"/>
+    <param name ="/use_sim_time" value="true"/>
+
     <include file="$(find interestingness_ros)/launch/interestingness.launch" />
+
+    <include file="$(find interestingness_ros)/launch/subtf_bags.launch" />
+
+    <include file="$(find interestingness_ros)/launch/robot.launch" />
 
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find interestingness_ros)/rviz/marker.rviz" />
 
