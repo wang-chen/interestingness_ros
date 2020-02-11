@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
     rospy.init_node('interestingness_node')
     parser = ROSArgparse(relative='interestingness_node/')
-    parser.add_argument("image-topic", default='/rs_front/color/image')
+    parser.add_argument("image-topic", default=['/rs_front/color/image'])
     parser.add_argument("data-root", type=str, default='/data/datasets', help="dataset root folder")
     parser.add_argument("model-save", type=str, default=pack_path+'/saves/ae.pt.SubTF.interest.mse', help="read model")
     parser.add_argument("crop-size", type=int, default=320, help='crop size')
