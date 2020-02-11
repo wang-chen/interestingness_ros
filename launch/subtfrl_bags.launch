@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="rosbag" type="play" name="rosbag" args="--clock -u 850 -r 3
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-18-42_0_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-20-28_1_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-22-11_2_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-23-54_3_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-25-36_4_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-27-18_5_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-28-58_6_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-30-40_7_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-32-22_8_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-34-05_9_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-35-46_10_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-37-28_11_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-39-10_12_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-40-51_13_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-42-34_14_frl.bag
+    /data/datasets/SubT/SubTFRL-bag/objdet_2019-08-20-17-44-18_15_frl.bag"/>
+
+</launch>

@@ -64,9 +64,10 @@ class InterestNode:
         net.set_train(False)
         net.memory.set_learning_rate(rr=args.rr, wr=args.wr)
         self.net = net.cuda() if torch.cuda.is_available() else net
-        rospy.Subscriber(args.image_topic, Image, self.callback)
-        self.image_pub = rospy.Publisher('interestingness/image', Image, queue_size=10)
-        self.info_pub = rospy.Publisher('interestingness/info', InterestInfo, queue_size=10)
+        for topic in args.image_topic:
+            rospy.Subscriber(topic, Image, self.callback)
+        self.image_pub = rospy.Publisher('interestingness/image', Image, queue_size=1)
+        self.info_pub = rospy.Publisher('interestingness/info', InterestInfo, queue_size=1)
 
     def spin(self):
         rospy.spin()
@@ -74,7 +75,7 @@ class InterestNode:
     def callback(self, msg):
         if msg.header.seq % args.skip_frames is not 0:
             return
-        rospy.loginfo("Received image: %d"%(msg.header.seq))
+        rospy.loginfo("Received image %s: %d"%(msg.header.frame_id, msg.header.seq))
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, "rgb8")
             frame = PIL.Image.fromarray(frame)

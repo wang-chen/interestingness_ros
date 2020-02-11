@@ -2,8 +2,7 @@
 <launch>
 
     <node pkg="interestingness_ros" type="interestingness_node.py" name="interestingness_node" output="screen">
-        <remap from="/rs_front/color/image" to="/rs_front/color/image"/>
-        <param name="image-topic" value="/rs_front/color/image" />
+        <!-- <param name="image-topic" value="[/rs_front/color/image]" /> -->
         <param name="data-root" value="/data/datasets" />
         <param name="model-save" value="$(find interestingness_ros)/saves/ae.pt.SubTF.interest.mse" />
         <param name="crop-size" value="320" />
