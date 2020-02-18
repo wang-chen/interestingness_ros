@@ -2,7 +2,7 @@
 <package format="2">
   <name>interestingness_ros</name>
   <version>1.0.0</version>
-  <description>The interestingness_ros package</description>
+  <description>A ROS warper for interestingness package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -73,6 +73,9 @@
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>message_runtime</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>husky_gazebo</exec_depend>
+  <exec_depend>rviz</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
