@@ -10,7 +10,6 @@ project(interestingness_ros)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  cv_bridge
   roscpp
   rospy
   std_msgs
@@ -18,6 +17,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   geometry_msgs
   message_generation
+  message_runtime
+  cv_bridge
 )
 
 
@@ -116,7 +117,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES interestingness_ros
-#  CATKIN_DEPENDS cv_bridge roscpp rospy std_msgs
+ CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs message_runtime cv_bridge
 #  DEPENDS system_lib
 )
 
