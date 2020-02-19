@@ -9,6 +9,7 @@
   <license>BSD-3</license>
 
   <url type="website">https://chenwang.site/interestingness</url>
+  <url type="repository">https://github.com/wang-chen/interestingness_ros</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>cv_bridge</build_depend>
