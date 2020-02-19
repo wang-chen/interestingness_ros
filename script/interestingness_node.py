@@ -57,23 +57,30 @@ from interestingness.torchutil import ConvLoss, CosineLoss, CorrelationLoss, Spl
 
 
 class InterestNode:
-    def __init__(self, transform):
+    def __init__(self, args, transform):
         super(InterestNode, self).__init__()
+        self.config(args)
         self.transform, self.bridge = transform, CvBridge()
-        net = torch.load(args.model_save)
+        net = torch.load(self.model_save)
         net.set_train(False)
-        net.memory.set_learning_rate(rr=args.rr, wr=args.wr)
+        net.memory.set_learning_rate(rr=self.rr, wr=self.wr)
         self.net = net.cuda() if torch.cuda.is_available() else net
-        for topic in args.image_topic:
+        for topic in self.image_topic:
             rospy.Subscriber(topic, Image, self.callback)
         self.image_pub = rospy.Publisher('interestingness/image', Image, queue_size=1)
         self.info_pub = rospy.Publisher('interestingness/info', InterestInfo, queue_size=1)
+
+    def config(self, args):
+        self.rr, self.wr = args.rr, args.wr
+        self.model_save = args.model_save
+        self.image_topic = args.image_topic
+        self.skip_frames = args.skip_frames
 
     def spin(self):
         rospy.spin()
 
     def callback(self, msg):
-        if msg.header.seq % args.skip_frames is not 0:
+        if msg.header.seq % self.skip_frames is not 0:
             return
         rospy.loginfo("Received image %s: %d"%(msg.header.frame_id, msg.header.seq))
         try:
@@ -124,6 +131,6 @@ if __name__ == '__main__':
 
     movavg = MovAvg(args.window_size)
 
-    node = InterestNode(transform)
+    node = InterestNode(args, transform)
 
     node.spin()
