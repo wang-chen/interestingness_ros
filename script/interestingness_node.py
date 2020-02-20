@@ -61,6 +61,7 @@ class InterestNode:
     def __init__(self, args, transform):
         super(InterestNode, self).__init__()
         self.config(args)
+        self.movavg = MovAvg(self.window_size)
         self.transform, self.bridge = transform, CvBridge()
         net = torch.load(self.model_save)
         net.set_train(False)
@@ -76,6 +77,7 @@ class InterestNode:
         self.model_save = args.model_save
         self.image_topic = args.image_topic
         self.skip_frames = args.skip_frames
+        self.window_size = args.window_size
 
     def spin(self):
         rospy.spin()
@@ -93,7 +95,7 @@ class InterestNode:
         else:
             frame = frame.cuda() if torch.cuda.is_available() else frame
             _, loss = self.net(frame)
-            loss = movavg.append(loss)
+            loss = self.movavg.append(loss)
             frame = 255*show_batch_box(frame, msg.header.seq, loss.item(),show_now=False)
             frame_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))
             info = InterestInfo()
@@ -131,8 +133,6 @@ if __name__ == '__main__':
         transforms.Resize((args.crop_size, args.crop_size)),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
-
-    movavg = MovAvg(args.window_size)
 
     node = InterestNode(args, transform)
 
