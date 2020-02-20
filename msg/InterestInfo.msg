@@ -4,6 +4,11 @@ Header header
 float32 level
 
 # The location of interestingness
-geometry_msgs/Pose origin
+geometry_msgs/Pose pose
+
+# The information of feature map
 float32[] feature_map
 int32[] feature_shape
+
+# The reading weights from visual memory
+float32[] reading_weights
