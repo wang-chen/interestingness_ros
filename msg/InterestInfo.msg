@@ -5,3 +5,5 @@ float32 level
 
 # The location of interestingness
 geometry_msgs/Pose origin
+float32[] feature_map
+int32[] feature_shape

@@ -38,6 +38,7 @@ import rospkg
 import argparse
 import numpy as np
 from sensor_msgs.msg import Image
+from rospy.numpy_msg import numpy_msg
 from cv_bridge import CvBridge, CvBridgeError
 import torchvision.transforms as transforms
 
@@ -67,8 +68,8 @@ class InterestNode:
         self.net = net.cuda() if torch.cuda.is_available() else net
         for topic in self.image_topic:
             rospy.Subscriber(topic, Image, self.callback)
-        self.image_pub = rospy.Publisher('interestingness/image', Image, queue_size=1)
-        self.info_pub = rospy.Publisher('interestingness/info', InterestInfo, queue_size=1)
+        self.frame_pub = rospy.Publisher('interestingness/image', Image, queue_size=10)
+        self.info_pub = rospy.Publisher('interestingness/info', numpy_msg(InterestInfo), queue_size=10)
 
     def config(self, args):
         self.rr, self.wr = args.rr, args.wr
@@ -94,11 +95,13 @@ class InterestNode:
             _, loss = self.net(frame)
             loss = movavg.append(loss)
             frame = 255*show_batch_box(frame, msg.header.seq, loss.item(),show_now=False)
-            img_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))
+            frame_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))
             info = InterestInfo()
             info.level = level_height(loss.item())
-            info.header = img_msg.header = msg.header
-            self.image_pub.publish(img_msg)
+            info.feature_shape = self.net.states.shape
+            info.feature_map = self.net.states.cpu().view(-1).numpy()
+            info.header = frame_msg.header = msg.header
+            self.frame_pub.publish(frame_msg)
             self.info_pub.publish(info)
 
 
