@@ -29,7 +29,6 @@
 
 import math
 import rospy
-import tf2_ros
 
 from rosutil import ROSArgparse
 from interestingness_ros.msg import InterestInfo
