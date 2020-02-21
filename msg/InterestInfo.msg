@@ -6,6 +6,10 @@ float32 level
 # The location of interestingness
 geometry_msgs/Pose pose
 
+# The image processed
+float32[] image
+int32[] image_shape
+
 # The information of feature map
 float32[] feature_map
 int32[] feature_shape

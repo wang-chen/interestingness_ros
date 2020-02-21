@@ -63,6 +63,7 @@ class InterestNode:
         self.config(args)
         self.movavg = MovAvg(self.window_size)
         self.transform, self.bridge = transform, CvBridge()
+        self.normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         net = torch.load(self.model_save)
         net.set_train(False)
         net.memory.set_learning_rate(rr=self.rr, wr=self.wr)
@@ -89,7 +90,8 @@ class InterestNode:
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, "rgb8")
             frame = PIL.Image.fromarray(frame)
-            frame = self.transform(frame).unsqueeze(dim=0)
+            image = self.transform(frame)
+            frame = self.normalize(image).unsqueeze(dim=0)
         except CvBridgeError:
             rospy.logerr(CvBridgeError)
         else:
@@ -100,6 +102,8 @@ class InterestNode:
             frame_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))
             info = InterestInfo()
             info.level = level_height(loss.item())
+            info.image_shape = image.shape
+            info.image = image.view(-1).numpy()
             info.feature_shape = self.net.states.shape
             info.feature_map = self.net.states.cpu().view(-1).numpy()
             info.reading_weights = self.net.memory.rw.cpu().view(-1).numpy()
@@ -132,8 +136,7 @@ if __name__ == '__main__':
         VerticalFlip(), # Front camera of SubTF is mounted vertical flipped.
         transforms.CenterCrop(args.crop_size),
         transforms.Resize((args.crop_size, args.crop_size)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+        transforms.ToTensor()])
 
     node = InterestNode(args, transform)
 
