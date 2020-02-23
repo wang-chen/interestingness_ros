@@ -105,7 +105,7 @@ class InterestNode:
             info.image_shape = image.shape
             info.image = image.view(-1).numpy()
             info.feature_shape = self.net.states.shape
-            info.feature_map = self.net.states.cpu().view(-1).numpy()
+            info.feature = self.net.states.cpu().view(-1).numpy()
             info.reading_weights = self.net.memory.rw.cpu().view(-1).numpy()
             info.header = frame_msg.header = msg.header
             self.frame_pub.publish(frame_msg)
