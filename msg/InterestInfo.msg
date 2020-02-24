@@ -10,9 +10,10 @@ geometry_msgs/Pose pose
 float32[] image
 int32[] image_shape
 
-# The information of feature map
+# The information of feature map / memory reading
 float32[] feature
-int32[] feature_shape
+float32[] memory
+int32[] shape
 
 # The reading weights from visual memory
 float32[] reading_weights
