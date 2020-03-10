@@ -62,6 +62,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 add_message_files(
   FILES
   InterestInfo.msg
+  UnInterests.msg
 )
 
 ## Generate services in the 'srv' folder

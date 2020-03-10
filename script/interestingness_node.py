@@ -48,8 +48,8 @@ interestingness_path = os.path.join(pack_path,'interestingness')
 sys.path.append(pack_path)
 sys.path.append(interestingness_path)
 
-from rosutil import ROSArgparse
-from interestingness_ros.msg import InterestInfo
+from rosutil import ROSArgparse, torch_to_msg, msg_to_torch
+from interestingness_ros.msg import InterestInfo, UnInterests
 from interestingness.test_interest import MovAvg, show_batch_box, level_height
 from interestingness.interestingness import AE, VAE, AutoEncoder, Interestingness
 from interestingness.dataset import ImageData, Dronefilm, DroneFilming, SubT, SubTF, PersonalVideo
@@ -70,6 +70,7 @@ class InterestNode:
         self.net = net.cuda() if torch.cuda.is_available() else net
         for topic in self.image_topic:
             rospy.Subscriber(topic, Image, self.callback)
+        rospy.Subscriber(args.interaction_topic, numpy_msg(UnInterests), self.interaction_callback)
         self.frame_pub = rospy.Publisher('interestingness/image', Image, queue_size=10)
         self.info_pub = rospy.Publisher('interestingness/info', numpy_msg(InterestInfo), queue_size=10)
 
@@ -112,12 +113,21 @@ class InterestNode:
             self.frame_pub.publish(frame_msg)
             self.info_pub.publish(info)
 
+    def interaction_callback(self, msg):
+        ''' To cooperate with interaction package
+        '''
+        rospy.loginfo('Received uninteresting feature maps %d'%(msg.header.seq))
+        coding = msg_to_torch(msg.feature, msg.shape)
+        coding = coding.cuda() if torch.cuda.is_available() else coding
+        self.net.memory.write(coding)
+
 
 if __name__ == '__main__':
 
     rospy.init_node('interestingness_node')
     parser = ROSArgparse(relative='interestingness_node/')
     parser.add_argument("image-topic", default=['/rs_front/color/image'])
+    parser.add_argument("interaction-topic", default='/interaction/feature_map')
     parser.add_argument("data-root", type=str, default='/data/datasets', help="dataset root folder")
     parser.add_argument("model-save", type=str, default=pack_path+'/saves/ae.pt.SubTF.interest.mse', help="read model")
     parser.add_argument("crop-size", type=int, default=320, help='crop size')
