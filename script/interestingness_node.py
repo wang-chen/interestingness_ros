@@ -102,7 +102,7 @@ class InterestNode:
             frame = 255*show_batch_box(frame, msg.header.seq, loss.item(),show_now=False)
             frame_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))
             info = InterestInfo()
-            info.level = level_height(loss.item())
+            info.level = loss.item()
             info.image_shape = image.shape
             info.image = image.view(-1).numpy()
             info.shape = self.net.states.shape

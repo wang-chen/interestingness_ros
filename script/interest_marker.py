@@ -27,13 +27,21 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH 
 # DAMAGE.
 
+import os
+import sys
 import math
 import rospy
-
+import rospkg
 from rosutil import ROSArgparse
 from interestingness_ros.msg import InterestInfo
 from visualization_msgs.msg import Marker, MarkerArray
 
+rospack = rospkg.RosPack()
+pack_path = rospack.get_path('interestingness_ros')
+interestingness_path = os.path.join(pack_path,'interestingness')
+sys.path.append(pack_path)
+sys.path.append(interestingness_path)
+from interestingness.test_interest import level_height
 
 def info_callback(msg):
     if msg.level < args.min_level:
@@ -46,15 +54,16 @@ def info_callback(msg):
     marker.type = marker.SPHERE
     marker.action = marker.ADD
 
-    marker.color.a = msg.level
+    level = level_height(msg.level)
+    marker.color.a = level
     marker.color.r, marker.color.g, marker.color.b = 1, 0, 0
-    marker.scale.x, marker.scale.y, marker.scale.z = [4*msg.level]*3
+    marker.scale.x, marker.scale.y, marker.scale.z = [4*level]*3
 
     marker.pose.orientation.w = 1
     marker.pose.position.z = 3
     marker.lifetime.secs = 999999999
     publisher.publish(marker)
-    rospy.logwarn('Sent interests with level: {}.'.format(msg.level))
+    rospy.logwarn('Sent interests with level: {}.'.format(level))
 
 
 if __name__ == '__main__':
