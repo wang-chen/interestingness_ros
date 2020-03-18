@@ -44,8 +44,9 @@ sys.path.append(interestingness_path)
 from interestingness.test_interest import level_height
 
 def info_callback(msg):
-    if msg.level < args.min_level:
-        rospy.loginfo('Skip interests with level: {}'.format(msg.level))
+    level = level_height(msg.level)
+    if level < args.min_level:
+        rospy.loginfo('Skip interests with level: {}'.format(level))
         return
 
     marker = Marker()
@@ -54,7 +55,6 @@ def info_callback(msg):
     marker.type = marker.SPHERE
     marker.action = marker.ADD
 
-    level = level_height(msg.level)
     marker.color.a = level
     marker.color.r, marker.color.g, marker.color.b = 1, 0, 0
     marker.scale.x, marker.scale.y, marker.scale.z = [4*level]*3
