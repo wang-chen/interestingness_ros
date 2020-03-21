@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node pkg="rosbag" type="play" name="rosbag" args="--clock -u 850 -r 7
+    <node pkg="rosbag" type="play" name="rosbag" args="--clock -r 3
     /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-18-42_0_front.bag
     /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-20-28_1_front.bag
     /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-22-11_2_front.bag
@@ -17,6 +17,27 @@
     /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-39-10_12_front.bag
     /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-40-51_13_front.bag
     /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-42-34_14_front.bag
-    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-44-18_15_front.bag"/>
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-44-18_15_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-46-01_16_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-47-44_17_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-49-28_18_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-51-11_19_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-52-54_20_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-54-37_21_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-56-20_22_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-58-02_23_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-17-59-45_24_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-01-27_25_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-03-09_26_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-04-53_27_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-06-36_28_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-08-18_29_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-10-02_30_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-11-45_31_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-13-29_32_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-15-12_33_front.bag
+    /data/datasets/SubT/SubTF-bag/objdet_2019-08-20-18-16-56_34_front.bag
+    "/>
 
 </launch>
+

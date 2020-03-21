@@ -4,7 +4,7 @@
     <node pkg="interestingness_ros" type="interestingness_node.py" name="interestingness_node" output="screen">
         <!-- <remap from="/rs_front/color/image" to="/your_image_topic"/> -->
         <param name="data-root" value="/data/datasets" />
-        <param name="model-save" value="$(find interestingness_ros)/saves/ae.pt.SubTF.interest.mse" />
+        <param name="model-save" value="$(find interestingness_ros)/saves/ae.pt.SubTF.n1000.mse" />
         <param name="crop-size" value="320" />
         <param name="num-interest" value="10" />
         <param name="skip-frames" value="1" />
@@ -14,7 +14,7 @@
         <param name="wr" value="5" />
     </node>
 
-    <node pkg="interestingness_ros" type="interest_marker.py" name="interestmarker_node" output="screen">
+    <node pkg="interestingness_ros" type="interest_marker.py" name="interestmarker_node" output="log">
         <remap from="/interestingness/info" to="/interestingness/info"/>
         <param name="min-level" value="0.6" />
     </node>
