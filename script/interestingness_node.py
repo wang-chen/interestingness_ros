@@ -144,7 +144,7 @@ if __name__ == '__main__':
         os.makedirs(results_path)
 
     transform = transforms.Compose([
-        VerticalFlip(), # Front camera of SubTF is mounted vertical flipped.
+        VerticalFlip(), # Some front camera of SubTF is mounted vertical flipped. Comment this line if not needed.
         transforms.CenterCrop(args.crop_size),
         transforms.Resize((args.crop_size, args.crop_size)),
         transforms.ToTensor()])
