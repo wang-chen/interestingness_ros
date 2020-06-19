@@ -43,7 +43,14 @@ If you want plain python package, go to [interestingness](https://github.com/wan
       git submodule init
       git submodule update
 
-* Download the [SubT](https://github.com/wang-chen/SubT) ROS bag files, then run
+* Download the pre-trained model named [ae.pt.SubTF.n1000.mse](https://github.com/wang-chen/interestingness/releases/download/v1.0/ae.pt.SubTF.n1000.mse) into folder "saves".
+
+* Download the [SubT](https://github.com/wang-chen/SubT) ROS bag files into folder [datalocation].
+
+* Change the argument "datalocation" in "subtf_bags.launch" to [datalocation], e.g.,
+
+      <arg name="datalocation" default="/data/datasets"/>
+* Run
 
       roslaunch interestingness_ros interestingness_subtf.launch
  
