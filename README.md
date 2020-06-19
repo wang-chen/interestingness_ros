@@ -57,6 +57,18 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 
       <node pkg="rosbag" type="play" name="rosbag" args="--clock -r 3 $(arg SubT4)"/>
 
+* The corresponding sequence ID is listed:
+
+    |   Data sequence     | ID   | ROS args|
+    |  :-----------:      | :--: | :----: |
+    |  0817-ugv0-tunnel0  |  0   | SubT0 |
+    |  0817-ugv1-tunnel0  |  1   | SubT1 |
+    |  0818-ugv0-tunnel1  |  2   | SubT2 |
+    |  0818-ugv1-tunnel1  |  3   | SubT3 |
+    |  0820-ugv0-tunnel1  |  4   | SubT4 |
+    |  0821-ugv0-tunnel0  |  5   | SubT5 |
+    |  0821-ugv1-tunnel0  |  6   | SubT6 |
+
 * Run
 
       roslaunch interestingness_ros interestingness_subtf.launch
@@ -65,6 +77,8 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 * You may need to uncomment image transform in [L147](https://github.com/wang-chen/interestingness_ros/blob/f63e152a03d7c5eb1bcdd7ef95aeb026c8b5b234/script/interestingness_node.py#L147) in "interestingness_node.py" for UGV0 sequences in SubTF.
 
       VerticalFlip(), # Front camera of UGV0 in SubTF is mounted vertical flipped. Uncomment this line when needed.
+
+
 
 ---
 ## Citation
