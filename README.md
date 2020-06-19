@@ -49,18 +49,23 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 
 * Download the [SubT](https://github.com/wang-chen/SubT) ROS bag files into folder [datalocation].
 
-* Change the argument "datalocation" in "subtf_bags.launch" to [datalocation], e.g.,
+* Change the argument "datalocation" in [L4](https://github.com/wang-chen/interestingness_ros/blob/16168a074c0866e832ab46bb62c6c8382dc14b6c/launch/subtf_bags.launch#L4) of "subtf_bags.launch" to [datalocation], e.g.,
 
       <arg name="datalocation" default="/data/datasets"/>
  
-* You may change test sequence ID and bag playing speed in "subtf_bags.launch".
+* You may change sequence ID and bag playing speed in [L187](https://github.com/wang-chen/interestingness_ros/blob/a7b921a4b8f70ef9bdf80e162d528f42bac485f6/launch/subtf_bags.launch#L187) of "subtf_bags.launch".
 
       <node pkg="rosbag" type="play" name="rosbag" args="--clock -r 3 $(arg SubT4)"/>
 
 * Run
 
       roslaunch interestingness_ros interestingness_subtf.launch
- 
+      # You need to wait for a while for first launch.
+
+* You may need to uncomment image transform in [L321](https://github.com/wang-chen/interestingness_ros/blob/16168a074c0866e832ab46bb62c6c8382dc14b6c/launch/subtf_bags.launch#L321) in "interestingness_node.py" for UGV0 sequences in SubTF.
+
+      VerticalFlip(), # Front camera of UGV0 in SubTF is mounted vertical flipped. Uncomment this line when needed.
+
 ---
 ## Citation
 
