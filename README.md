@@ -29,7 +29,7 @@ If you want plain python package, go to [interestingness](https://github.com/wan
   
   * ROS Noetic is native with Python 3.
 
-  * Until June 2020, husky_gazebo doesn't work on ROS Noetic.  You need to comment 'robot.launch'.
+  * Until June 2020, husky_gazebo doesn't work on ROS Noetic.  You need to comment 'robot.launch' in all launch files.
 
         <!-- <include file="$(find interestingness_ros)/launch/robot.launch" /> -->
 
