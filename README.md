@@ -10,7 +10,7 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 
 * Dependencies:
   
-     PyTorch 1.4+, matplotlib.
+     ROS, PyTorch 1.4+, Matplotlib.
 
 * For ROS Melodic with Ubuntu 18.04.
 
@@ -43,14 +43,37 @@ If you want plain python package, go to [interestingness](https://github.com/wan
       git submodule init
       git submodule update
 
-* Download the pre-trained model named [ae.pt.SubTF.n1000.mse](https://github.com/wang-chen/interestingness/releases/download/v1.0/ae.pt.SubTF.n1000.mse) into folder "saves".
+* Download pre-trained model [ae.pt.SubTF.n1000.mse](https://github.com/wang-chen/interestingness/releases/download/v1.0/ae.pt.SubTF.n1000.mse) into folder "saves", or change argument in "interestingness.launch".
+
+      <param name="model-save" value="$(find interestingness_ros)/saves/ae.pt.SubTF.n1000.mse" />
 
 * Download the [SubT](https://github.com/wang-chen/SubT) ROS bag files into folder [datalocation].
 
 * Change the argument "datalocation" in "subtf_bags.launch" to [datalocation], e.g.,
 
       <arg name="datalocation" default="/data/datasets"/>
+ 
+* You may change test sequence ID and bag playing speed in "subtf_bags.launch".
+
+      <node pkg="rosbag" type="play" name="rosbag" args="--clock -r 3 $(arg SubT4)"/>
+
 * Run
 
       roslaunch interestingness_ros interestingness_subtf.launch
  
+---
+## Citation
+
+      @article{wang2020visual,
+        author = {Wang, Chen and Wang, Wenshan and Qiu, Yuheng and Hu, Yafei and Scherer, Sebastian},
+        journal = {arXiv preprint arXiv:2005.08829},
+        title = {{Visual Memorability for Robotic Interestingness via Unsupervised Online Learning}},
+        year = {2020}
+      }
+
+* Download [this paper](https://arxiv.org/pdf/2005.08829.pdf).
+
+---
+You may watch the following video to catch the idea of this work.
+
+[<img src="https://img.youtube.com/vi/gBBdYdUrIcw/maxresdefault.jpg" width="100%">](https://youtu.be/gBBdYdUrIcw)
