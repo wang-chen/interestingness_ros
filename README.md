@@ -35,7 +35,7 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 
   * We have not provide other visualization methods. But you can still run the program.
 
-* Remember to update the submodule before catin_make.
+* Remember to update the submodule before catkin_make.
  
       cd ~/catkin_ws/src
       git clone https://github.com/wang-chen/interestingness_ros
