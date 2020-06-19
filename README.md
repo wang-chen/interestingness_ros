@@ -43,4 +43,7 @@ If you want plain python package, go to [interestingness](https://github.com/wan
       git submodule init
       git submodule update
 
-    
+* Download the [SubT](https://github.com/wang-chen/SubT) ROS bag files, then run
+
+      roslaunch interestingness_ros interestingness_subtf.launch
+ 
