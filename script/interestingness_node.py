@@ -129,7 +129,7 @@ if __name__ == '__main__':
     parser.add_argument("image-topic", default=['/rs_front/color/image'])
     parser.add_argument("interaction-topic", default='/interaction/feature_map')
     parser.add_argument("data-root", type=str, default='/data/datasets', help="dataset root folder")
-    parser.add_argument("model-save", type=str, default=pack_path+'/saves/ae.pt.SubTF.interest.mse', help="read model")
+    parser.add_argument("model-save", type=str, default=pack_path+'/saves/ae.pt.SubTF.n1000.mse', help="read model")
     parser.add_argument("crop-size", type=int, default=320, help='crop size')
     parser.add_argument("num-interest", type=int, default=10, help='loss compute by grid')
     parser.add_argument("skip-frames", type=int, default=1, help='number of skip frame')
@@ -144,7 +144,7 @@ if __name__ == '__main__':
         os.makedirs(results_path)
 
     transform = transforms.Compose([
-        VerticalFlip(), # Some front camera of SubTF is mounted vertical flipped. Comment this line if not needed.
+        # VerticalFlip(), # Front camera of UGV0 in SubTF is mounted vertical flipped. Uncomment this line when needed.
         transforms.CenterCrop(args.crop_size),
         transforms.Resize((args.crop_size, args.crop_size)),
         transforms.ToTensor()])
