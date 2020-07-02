@@ -83,12 +83,12 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 ---
 ## Citation
 
-      @article{wang2020visual,
-        author = {Wang, Chen and Wang, Wenshan and Qiu, Yuheng and Hu, Yafei and Scherer, Sebastian},
-        journal = {arXiv preprint arXiv:2005.08829},
-        title = {{Visual Memorability for Robotic Interestingness via Unsupervised Online Learning}},
-        year = {2020}
-      }
+    @inproceedings{wang2020visual,
+      title={{Visual Memorability for Robotic Interestingness via Unsupervised Online Learning}},
+      author={Wang, Chen and Wang, Wenshan and Qiu, Yuheng and Hu, Yafei and Scherer, Sebastian},
+      booktitle={European Conference on Computer Vision (ECCV 2020)},
+      year={2020},
+    }
 
 * Download [this paper](https://arxiv.org/pdf/2005.08829.pdf).
 
