@@ -84,10 +84,11 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 ## Citation
 
     @inproceedings{wang2020visual,
-      title={{Visual Memorability for Robotic Interestingness via Unsupervised Online Learning}},
+      title={Visual memorability for robotic interestingness via unsupervised online learning},
       author={Wang, Chen and Wang, Wenshan and Qiu, Yuheng and Hu, Yafei and Scherer, Sebastian},
-      booktitle={European Conference on Computer Vision (ECCV 2020)},
+      booktitle={European Conference on Computer Vision (ECCV)},
       year={2020},
+      organization={Springer}
     }
 
 * Download [this paper](https://arxiv.org/pdf/2005.08829.pdf).
@@ -95,4 +96,4 @@ If you want plain python package, go to [interestingness](https://github.com/wan
 ---
 You may watch the following video to catch the idea of this work.
 
-[<img src="https://img.youtube.com/vi/gBBdYdUrIcw/maxresdefault.jpg" width="100%">](https://youtu.be/gBBdYdUrIcw)
+[<img src="https://img.youtube.com/vi/PXIcm17fEko/maxresdefault.jpg" width="100%">](https://youtu.be/PXIcm17fEko)
