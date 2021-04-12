@@ -50,8 +50,8 @@ sys.path.append(interestingness_path)
 
 from rosutil import ROSArgparse, torch_to_msg, msg_to_torch
 from interestingness_ros.msg import InterestInfo, UnInterests
-from interestingness.test_interest import MovAvg, show_batch_box, level_height
-from interestingness.interestingness import AE, VAE, AutoEncoder, Interestingness
+from interestingness.online import MovAvg, show_batch_box, level_height
+from interestingness.interestingness import Interestingness
 from interestingness.dataset import ImageData, Dronefilm, DroneFilming, SubT, SubTF, PersonalVideo
 from interestingness.torchutil import VerticalFlip, count_parameters, show_batch, show_batch_origin, Timer, MovAvg
 from interestingness.torchutil import ConvLoss, CosineLoss, CorrelationLoss, Split2d, Merge2d, PearsonLoss, FiveSplit2d
@@ -85,7 +85,7 @@ class InterestNode:
         rospy.spin()
 
     def callback(self, msg):
-        if msg.header.seq % self.skip_frames is not 0:
+        if msg.header.seq % self.skip_frames != 0:
             return
         rospy.loginfo("Received image %s: %d"%(msg.header.frame_id, msg.header.seq))
         try:
@@ -97,7 +97,7 @@ class InterestNode:
             rospy.logerr(CvBridgeError)
         else:
             frame = frame.cuda() if torch.cuda.is_available() else frame
-            _, loss = self.net(frame)
+            loss = self.net(frame)
             loss = self.movavg.append(loss)
             frame = 255*show_batch_box(frame, msg.header.seq, loss.item(),show_now=False)
             frame_msg = self.bridge.cv2_to_imgmsg(frame.astype(np.uint8))

@@ -41,7 +41,7 @@ pack_path = rospack.get_path('interestingness_ros')
 interestingness_path = os.path.join(pack_path,'interestingness')
 sys.path.append(pack_path)
 sys.path.append(interestingness_path)
-from interestingness.test_interest import level_height
+from interestingness.online import level_height
 
 def info_callback(msg):
     level = level_height(msg.level)

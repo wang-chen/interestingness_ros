@@ -2,6 +2,7 @@
 <launch>
 
     <arg name="datalocation" default="/data/datasets"/>
+    <arg name="use_sim_time" value="true"/>
 
     <arg name="SubT0" default="
     $(arg datalocation)/SubT/0817-ugv0-tunnel0/objdet_2019-08-17-16-32-27_0.bag
